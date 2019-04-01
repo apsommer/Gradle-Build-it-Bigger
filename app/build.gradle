@@ -21,7 +21,6 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,4 +46,7 @@ dependencies {
     })
 
     testImplementation 'junit:junit:4.12'
+
+    // app depends on the java library
+    implementation project(":javaLib")
 }
