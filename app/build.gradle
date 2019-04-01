@@ -11,13 +11,13 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -47,6 +47,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 
-    // app depends on the java library
+    // app depends on the custom java and android libraries
     implementation project(":javaLib")
+    implementation project(":androidLib")
 }
