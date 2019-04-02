@@ -21,6 +21,13 @@ apply plugin: 'war'
 apply plugin: 'com.google.cloud.tools.appengine'
 apply plugin: 'com.google.cloud.tools.endpoints-framework-server'
 
+// the 0.0.0.0 host parameter sets the server to listen for external connections
+appengine {
+    run {
+        host = '0.0.0.0'
+    }
+}
+
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
@@ -30,4 +37,7 @@ dependencies {
     implementation 'javax.servlet:servlet-api:2.5'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
+
+    // depends on GCE servers
+    implementation project(':javaLib')
 }

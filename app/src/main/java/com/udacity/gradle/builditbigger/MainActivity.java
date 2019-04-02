@@ -1,7 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         // get joke string from JavaJokes object
         String jokeFromJavaLibrary = javaJokes.supplyJoke();
+
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Bilbo"));
 
         // intent to start activity from android library
         Intent intent = new Intent(getApplicationContext(), DisplayJokesActivity.class);
