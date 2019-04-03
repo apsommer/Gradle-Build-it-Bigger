@@ -12,6 +12,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class ConnectedTest {
@@ -26,10 +27,9 @@ public class ConnectedTest {
         // click the "Tell Joke" button in the main activity fragment
         onView(withId(R.id.b_tell_joke)).perform(click());
 
-        // this triggers an asynctask, which espresso waits for by default
+        // this triggers an asynctask, which espresso waits to finish by default
 
-        onView(withId(R.id.tv_display_joke)).check(matches(withText(R.string.espresso_test_string)));
-
+        // verify that that the asynctask successfully retrieves a non-empty string
+        onView(withId(R.id.tv_display_joke)).check(matches(not(withText(""))));
     }
-
 }
