@@ -24,16 +24,26 @@ public class MainActivityFragment extends Fragment {
         // inflate fragment layout
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // get reference to ad xml element
-        AdView mAdView = (AdView) root.findViewById(R.id.adView);
+        // only the free flavor contains the ad
+        boolean isPaid = getResources().getBoolean(R.bool.isPaid);
+        if (!isPaid) {
 
-        // Create an ad request. Check logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mAdView.loadAd(adRequest);
+            // get reference to ad xml element
+            AdView mAdView = (AdView) root.findViewById(R.id.adView);
+
+            // make ad visible
+            mAdView.setVisibility(View.VISIBLE);
+
+            // create an ad request
+            // check logcat for hashed device ID to test on a physical device
+            // ex: AdRequest.Builder.addTestDevice("ABCDEF012345")
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+            mAdView.loadAd(adRequest);
+
+        }
+
         return root;
     }
 }
