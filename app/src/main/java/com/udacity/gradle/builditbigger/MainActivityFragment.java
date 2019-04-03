@@ -24,8 +24,9 @@ public class MainActivityFragment extends Fragment {
         // inflate fragment layout
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // get reference to ad
+        // get reference to ad xml element
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
+
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."

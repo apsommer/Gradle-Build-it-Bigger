@@ -6,7 +6,7 @@ import com.google.api.server.spi.config.ApiNamespace;
 
 import javax.inject.Named;
 
-// custom java library
+// import custom java library
 import com.sommerengineering.javalib.JavaJokes;
 
 /** An endpoint class we are exposing */
@@ -26,12 +26,13 @@ public class MyEndpoint {
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
 
-        // get joke from Java library
+        // get a joke from Java library
         JavaJokes javaJokes = new JavaJokes();
-        String joke = javaJokes.supplyJoke();
+        String joke = javaJokes.supplySingleJoke();
 
+        // backend object model
         MyBean response = new MyBean();
-        response.setData("Hi, " + name + " " + joke);
+        response.setData("Hi, " + name + ". " + joke);
 
         return response;
     }

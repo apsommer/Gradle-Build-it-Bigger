@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.sommerengineering.javalib.JavaJokes;
 import com.sommerengineering.androidlib.DisplayJokesActivity;
@@ -48,19 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
 
-        // create new object of JavaJokes class
-        JavaJokes javaJokes = new JavaJokes();
+        // start new asynctask that communicates with backend
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Drew"));
 
-        // get joke string from JavaJokes object
-        String jokeFromJavaLibrary = javaJokes.supplyJoke();
-
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Bilbo"));
-
-        // intent to start activity from android library
-        Intent intent = new Intent(getApplicationContext(), DisplayJokesActivity.class);
-
-        // add the joke to the intent and start the android library activity
-        intent.putExtra(DisplayJokesActivity.JOKE_KEY, jokeFromJavaLibrary);
-        startActivity(intent);
     }
 }
