@@ -20,3 +20,13 @@ allprojects {
         jcenter()
     }
 }
+
+// custom task
+task customTask {
+
+    description = "Launch GCE server, run connected tests, shutdown server."
+
+    dependsOn ":backend:appengineStart" // start GCE development server
+    dependsOn ":app:connectedCheck" // run all connected tests on currently connect devices
+    finalizedBy ":backend:appengineStop" // shutdown GCE server
+}
