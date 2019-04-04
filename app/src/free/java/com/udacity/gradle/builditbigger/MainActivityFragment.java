@@ -29,6 +29,17 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
+    // turn off the progress bar loading indicator
+    @Override
+    public void onResume() {
+
+        // hide the loading spinner
+        mLoadingSpinner.setVisibility(View.INVISIBLE);
+
+        // proceed with standard framework
+        super.onResume();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,9 +73,6 @@ public class MainActivityFragment extends Fragment {
 
                 // start new asynctask that communicates with backend
                 MainActivity.retrieveJoke(getContext());
-
-                // hide the loading spinner
-                mLoadingSpinner.setVisibility(View.INVISIBLE);
 
             }
         });
