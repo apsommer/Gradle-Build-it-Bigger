@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
-        android:onClick="tellJoke"
         android:text="@string/button_text" />
 
     <com.google.android.gms.ads.AdView
@@ -30,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id" />
 

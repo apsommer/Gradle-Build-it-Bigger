@@ -1,18 +1,29 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    InterstitialAd mInterstitialAd;
+    boolean mIsAdLoaded;
 
     public MainActivityFragment() {
     }
@@ -24,13 +35,38 @@ public class MainActivityFragment extends Fragment {
         // inflate fragment layout
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // free flavor contains the ad
+        // initialize the Mobile Ads SDK with this app specific ID
+        MobileAds.initialize(getContext(), getString(R.string.admob_app_id));
+
+        // display banner ad
+        displayBannerAd(root);
+
+        // setup interstitial ad
+        setupInterstitialAd();
+
+        // get reference to single UI button and set a click listener on it
+        Button jokeButton = (Button) root.findViewById(R.id.b_tell_joke);
+        jokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // show the interstitial ad
+                mInterstitialAd.show();
+
+                // start new asynctask that communicates with backend
+                MainActivity.retrieveJoke(getContext());
+
+            }
+        });
+
+        return root;
+    }
+
+    // Udacity provided code for Banner Ad
+    private void displayBannerAd(View root) {
 
         // get reference to ad xml element
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
-
-        // make ad visible
-        mAdView.setVisibility(View.VISIBLE);
 
         // create an ad request
         // check logcat for hashed device ID to test on a physical device
@@ -39,7 +75,27 @@ public class MainActivityFragment extends Fragment {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
-
-        return root;
     }
+
+    // setup Interstitial Ad
+    private void setupInterstitialAd() {
+
+        // new interstitial ad
+        mInterstitialAd = new InterstitialAd(getContext());
+
+        // "test ad unit ID" provided by Google
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+
+        // load test ad
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        // set listener to log when ad is finished loading
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Log.e("~~", "ad loaded.");
+            }
+        });
+    }
+
 }

@@ -45,10 +45,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
+    public static void retrieveJoke(Context context) {
 
-        // start new asynctask that communicates with backend
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Drew"));
-
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Drew"));
     }
 }
