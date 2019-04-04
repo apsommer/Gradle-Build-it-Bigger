@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
-import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -28,7 +27,6 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
-
 
                     // options for running against a local server
                     // 10.0.2.2 is the localhost IP for Android emulator

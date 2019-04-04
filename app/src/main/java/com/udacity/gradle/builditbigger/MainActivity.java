@@ -47,6 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static void retrieveJoke(Context context) {
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Drew"));
+        new EndpointsAsyncTask().execute(new Pair<>(context, "Drew"));
     }
 }
