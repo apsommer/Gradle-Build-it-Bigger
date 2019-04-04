@@ -14,11 +14,11 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
 
     // this creates an object of the MyEndpoint class
     private static MyApi myApiService = null;
-    private Context context;
+    private Context mContext;
 
     @Override
     protected String doInBackground(Pair<Context, String>... pairs) {
@@ -44,8 +44,8 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
             myApiService = builder.build();
         }
 
-        // get context and string from passed inputs
-        context = pairs[0].first;
+        // get mContext and string from passed inputs
+        mContext = pairs[0].first;
         String name = pairs[0].second;
 
         // run the api method and pass result to onPostExecute()
@@ -61,10 +61,10 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     protected void onPostExecute(String result) {
 
         // intent to start activity from android library
-        Intent intent = new Intent(context.getApplicationContext(), DisplayJokesActivity.class);
+        Intent intent = new Intent(mContext.getApplicationContext(), DisplayJokesActivity.class);
 
         // add the joke to the intent and start the android library activity
-        intent.putExtra(DisplayJokesActivity.JOKE_KEY, result);
-        context.startActivity(intent);
+        intent.putExtra(mContext.getString(R.string.JOKE_KEY), result);
+        mContext.startActivity(intent);
     }
 }

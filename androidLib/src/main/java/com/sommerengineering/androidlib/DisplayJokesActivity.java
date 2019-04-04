@@ -7,9 +7,6 @@ import android.widget.TextView;
 
 public class DisplayJokesActivity extends AppCompatActivity {
 
-    // key for string extra
-    public static final String JOKE_KEY = "JOKE_KEY";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +14,7 @@ public class DisplayJokesActivity extends AppCompatActivity {
 
         // extract joke string from intent
         Intent intent = getIntent();
-        String joke = intent.getStringExtra(JOKE_KEY);
+        String joke = intent.getStringExtra(getString(R.string.JOKE_KEY));
 
         // get reference to textview and display joke
         TextView textView = findViewById(R.id.tv_display_joke);
